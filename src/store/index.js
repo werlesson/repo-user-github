@@ -8,29 +8,43 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    repos: [],
-    info: {},
-    search: "werlesson"
+    repos: null,
+    info: null,
+    search: ""
   },
   mutations: {
     loadRepos: (state, res) => {
-      const { data } = res;
-      state.repos = data;
+      if (res !== null) {
+        const { data } = res;
+        state.repos = data;
+      }
     },
     setSearch: (state, username) => {
       state.search = username;
     },
     loadInfo: (state, res) => {
-      const { data } = res;
-      state.info = { ...data };
+      if (res !== null) {
+        const { data } = res;
+        state.info = { ...data };
+      }
     }
   },
   actions: {
     async getRepos({ commit, state }) {
-      commit("loadRepos", await UserRepository.getRepositories(state.search));
+      commit(
+        "loadRepos",
+        await UserRepository.getRepositories(state.search).catch(() => {
+          return null;
+        })
+      );
     },
     async getInfo({ commit, state }) {
-      commit("loadInfo", await UserRepository.getInfo(state.search));
+      commit(
+        "loadInfo",
+        await UserRepository.getInfo(state.search).catch(() => {
+          return null;
+        })
+      );
     }
   },
   modules: {}

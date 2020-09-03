@@ -2,11 +2,12 @@
   <div class="search">
     <input
       type="search"
-      :value="valor"
+      v-model="valor"
       :placeholder="placeholder"
       class="search--input"
+      @keyup.enter="toSearch"
     />
-    <button class="search--button">
+    <button class="search--button" @click="toSearch">
       <i-search color="white" />
     </button>
   </div>
@@ -25,6 +26,10 @@ export default {
     value: {
       type: String,
       required: true
+    },
+    onSearch: {
+      type: Function,
+      required: true
     }
   },
   data() {
@@ -33,8 +38,13 @@ export default {
     };
   },
   watch: {
-    valor(value) {
-      this.$emit("input", value);
+    valor() {
+      this.$emit("input", this.valor);
+    }
+  },
+  methods: {
+    toSearch() {
+      this.onSearch();
     }
   }
 };
