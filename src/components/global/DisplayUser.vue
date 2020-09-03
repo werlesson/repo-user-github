@@ -1,12 +1,8 @@
 <template>
   <div class="result--display">
-    <img
-      class="display-user--photo"
-      src="https://via.placeholder.com/280x280"
-      alt=""
-    />
-    <span class="display-user--name">Lindemberg</span>
-    <span class="display-user--username">lindeberg</span>
+    <img class="display-user--photo" :src="data.avatar_url" alt="" />
+    <span class="display-user--name">{{ data.name }}</span>
+    <span class="display-user--username">{{ data.login }}</span>
     <div class="display-user--info">
       <icon-text
         v-for="item in itens"
@@ -24,36 +20,48 @@ export default {
   components: {
     IconText
   },
+  props: {
+    data: {
+      type: Object,
+      required: true
+    },
+    stars: {
+      required: true
+    }
+  },
   data() {
-    return {
-      itens: [
+    return {};
+  },
+  computed: {
+    itens() {
+      return [
         {
           id: "organization",
           icon: "organization",
-          text: "Lux One"
+          text: this.data.company || "(Não informado)"
         },
         {
           id: "location",
           icon: "location",
-          text: "Fortaleza, CE"
+          text: this.data.location || "(Não informado)"
         },
         {
           id: "star",
           icon: "star",
-          text: "0"
+          text: this.stars || "(Não informado)"
         },
         {
           id: "repository",
           icon: "repository",
-          text: "4"
+          text: this.data.public_repos || "(Não informado)"
         },
         {
           id: "followers",
           icon: "followers",
-          text: "1"
+          text: this.data.followers || "(Não informado)"
         }
-      ]
-    };
+      ];
+    }
   }
 };
 </script>
