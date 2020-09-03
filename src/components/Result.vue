@@ -1,9 +1,17 @@
 <template>
-  <div>Result</div>
+  <div class="result">
+    <display-user />
+    <repository-user />
+  </div>
 </template>
 
 <script>
-export default {};
-</script>
+import { RepositoryUser, DisplayUser } from "./global";
 
-<style></style>
+export default {
+  components: {
+    RepositoryUser,
+    DisplayUser
+  }
+};
+</script>

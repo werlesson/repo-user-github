@@ -1,0 +1,17 @@
+.layout {
+  height: 100%;
+  display: grid;
+  grid-template:
+    "header" 70px
+    "content" 1fr
+    / 1fr;
+
+  &--header {
+    grid-area: header;
+  }
+
+  &--content {
+    grid-area: content;
+    padding: 1.5rem 1rem;
+  }
+}

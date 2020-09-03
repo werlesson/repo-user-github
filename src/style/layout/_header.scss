@@ -1,0 +1,17 @@
+.layout--header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  box-shadow: 0px 2px 10px rgba(#333, 0.18);
+
+  &--logo {
+    max-width: 280px;
+    width: 100%;
+  }
+
+  &--options {
+    min-width: 220px;
+    width: 50%;
+  }
+}

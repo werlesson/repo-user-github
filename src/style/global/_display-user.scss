@@ -1,0 +1,21 @@
+.display-user {
+  &--photo {
+  }
+
+  &--name {
+    margin-top: 1rem;
+    display: block;
+    font-size: 24px;
+  }
+
+  &--username {
+    margin-top: 0.5rem;
+    display: block;
+    font-size: 18px;
+    color: $gray;
+  }
+
+  &--info {
+    margin-top: 1.5rem;
+  }
+}

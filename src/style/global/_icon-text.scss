@@ -1,0 +1,10 @@
+.icon-text {
+  width: 100%;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  &--text {
+    margin-left: 0.5rem;
+    color: $gray;
+  }
+}
