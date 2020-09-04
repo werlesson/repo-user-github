@@ -25,7 +25,6 @@ export default {
   methods: {
     toSearch() {
       this.$store.commit("setSearch", this.searchText);
-      console.log(this.$route.name);
       if (this.$route.name !== "Result") this.$router.push({ name: "Result" });
     }
   }

@@ -1,11 +1,21 @@
 <template>
-  <div class="result">
-    <div v-if="notFound">
-      NADA ENCONTRADO
+  <div>
+    <div
+      v-if="notFound"
+      style="display: flex; flex-direction:column; justify-content: center; align-items: center;"
+    >
+      <h2 style="font-size: 2rem; margin: 1rem;">
+        Nenhum dado encontrado
+      </h2>
+      <p style="margin-bottom: 1rem;">
+        Nenhum dado foi encontrado com o termo pesquisado. Pesquise por outro
+        termo ou entre em contato com nosso suporte.
+      </p>
+      <img src="@/assets/icons/github.svg" width="100" alt="" />
     </div>
-    <div v-else>
-      <display-user :data="info" :stars="starsTotal" />
-      <repository-user :data="repos" />
+    <div class="result" v-else>
+      <display-user :user="info || {}" :stars="starsTotal" />
+      <repository-user :data="repos || []" />
     </div>
   </div>
 </template>
@@ -20,13 +30,18 @@ export default {
     DisplayUser
   },
   computed: {
-    ...mapState(["repos", "info"]),
+    ...mapState(["repos", "info", "search"]),
     starsTotal() {
-      return this.repos.reduce(this.getTotalStars, 0);
+      if (this.repos !== null) return this.repos.reduce(this.getTotalStars, 0);
+      return 0;
     },
     notFound() {
-      console.log(this.info, this.repos);
       return this.info === null && this.repos === null;
+    }
+  },
+  watch: {
+    search: function() {
+      this.getData();
     }
   },
   methods: {
@@ -38,6 +53,7 @@ export default {
       this.$store.dispatch("getInfo", { self: this });
     }
   },
+
   created() {
     this.getData();
   }

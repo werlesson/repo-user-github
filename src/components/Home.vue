@@ -28,6 +28,9 @@ export default {
       this.$store.commit("setSearch", this.searchText);
       this.$router.push({ name: "Result" });
     }
+  },
+  created() {
+    this.$store.commit("setSearch", this.searchText);
   }
 };
 </script>

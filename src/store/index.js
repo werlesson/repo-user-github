@@ -16,7 +16,13 @@ export default new Vuex.Store({
     loadRepos: (state, res) => {
       if (res !== null) {
         const { data } = res;
-        state.repos = data;
+        state.repos = data.sort((a, b) => {
+          if (a.stargazers_count > b.stargazers_count) return -1;
+          if (b.stargazers_count > a.stargazers_count) return 1;
+          return 0;
+        });
+      } else {
+        state.repos = null;
       }
     },
     setSearch: (state, username) => {
@@ -26,6 +32,8 @@ export default new Vuex.Store({
       if (res !== null) {
         const { data } = res;
         state.info = { ...data };
+      } else {
+        state.info = null;
       }
     }
   },
